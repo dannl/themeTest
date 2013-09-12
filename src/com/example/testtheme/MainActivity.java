@@ -6,6 +6,7 @@ import com.dolphin.browser.extensions.ThemeListener;
 import com.dolphin.browser.theme.ThemeManager;
 import com.dolphin.browser.theme.ThemeManager.ThemeColorUpdatingCallback;
 import com.dolphin.browser.theme.data.AbsTheme;
+import com.dolphin.browser.theme.view.FontIconDrawableView;
 import com.dolphin.browser.util.Log;
 import android.app.Activity;
 import android.graphics.Color;
@@ -16,9 +17,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
 import java.util.List;
 import java.util.Random;
 
@@ -27,6 +30,7 @@ public class MainActivity extends Activity {
     private ThemeManager mThemeManager;
     private LinearLayout mLayout;
     private View mColorPanel;
+    private FontIconDrawableView mFontIconDrawableView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,23 +40,17 @@ public class MainActivity extends Activity {
         layout.setOrientation(LinearLayout.VERTICAL);
         mThemeManager = (ThemeManager) ThemeManager.getInstance();
         mThemeManager.setTheme(mThemeManager.getAllThemes().get(0), true, true);
-        ImageView img = new ImageView(this);
+
+        FontIconDrawableView img = new FontIconDrawableView(this);
         layout.addView(img, new LinearLayout.LayoutParams(50, 50));
 
-        img = new ImageView(this);
+        img = new FontIconDrawableView(this);
         layout.addView(img, new LinearLayout.LayoutParams(50, 50));
 
-        img = new ImageView(this);
+        img = new FontIconDrawableView(this);
         layout.addView(img, new LinearLayout.LayoutParams(50, 50));
-        img.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Log.d("FontIconDrawable", "holy shit clicking!!");
-            }
-        });
-
-        img = new ImageView(this);
+        img = new FontIconDrawableView(this);
         layout.addView(img, new LinearLayout.LayoutParams(50, 50));
 
         TextView tex = new TextView(this);
@@ -61,27 +59,13 @@ public class MainActivity extends Activity {
         tex.setTypeface(Typeface.createFromAsset(getAssets(), "normal"));
         layout.addView(tex, new LinearLayout.LayoutParams(50, 50));
 
-        final List<AbsTheme> tms = mThemeManager.getAllThemes();
-        img.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                index ++ ;
-                if (index >= tms.size()) {
-                    index = 0;
-                }
-                mThemeManager.setTheme(tms.get(index), true, true);
-            }
-        });
-
-
         {
             //test theme color!!!!
-            img = new ImageView(this);
-            layout.addView(img, new LinearLayout.LayoutParams(320, 200));
+            ImageView wocao = new ImageView(this);
+            layout.addView(wocao, new LinearLayout.LayoutParams(320, 200));
             final Random ran = new Random();
 
-            img.setOnTouchListener(new OnTouchListener() {
+            wocao.setOnTouchListener(new OnTouchListener() {
 
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -103,7 +87,7 @@ public class MainActivity extends Activity {
                     updateTheme();
                 }
             });
-            mColorPanel = img;
+            mColorPanel = wocao;
         }
 
         setContentView(layout);
@@ -139,6 +123,24 @@ public class MainActivity extends Activity {
                 updateTheme();
             }
         });
+
+        final List<AbsTheme> tms = mThemeManager.getAllThemes();
+        final Button button = new Button(this);
+        button.setText("点击切换正常模式和夜间模式！");
+        layout.addView(button, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 100));
+        button.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                index ++ ;
+                if (index >= tms.size()) {
+                    index = 0;
+                }
+                mThemeManager.setTheme(tms.get(index), true, true);
+            }
+        });
+
+
         updateTheme();
     }
 
@@ -146,18 +148,18 @@ public class MainActivity extends Activity {
     private int index = 0;
 
     private void updateTheme() {
-        ImageView img = (ImageView) mLayout.getChildAt(0);
+        FontIconDrawableView img = (FontIconDrawableView) mLayout.getChildAt(0);
         img.setBackgroundColor(Color.RED);
-        img.setImageDrawable(mThemeManager.getFontIconDrawable(R.string.test_font_icon_0));
-        img = (ImageView) mLayout.getChildAt(1);
+        img.setFontIcon(mThemeManager.getFontIconDrawable(R.string.test_font_icon_0));
+        img = (FontIconDrawableView) mLayout.getChildAt(1);
         img.setBackgroundColor(Color.BLUE);
-        img.setImageDrawable(mThemeManager.getFontIconDrawable(R.string.test_font_icon_1));
-        img = (ImageView) mLayout.getChildAt(2);
+        img.setFontIcon(mThemeManager.getFontIconDrawable(R.string.test_font_icon_1));
+        img = (FontIconDrawableView) mLayout.getChildAt(2);
         img.setBackgroundColor(Color.GRAY);
-        img.setImageDrawable(mThemeManager.getFontIconDrawable(R.string.test_font_icon_2));
-        img = (ImageView) mLayout.getChildAt(3);
+        img.setFontIcon(mThemeManager.getFontIconDrawable(R.string.test_font_icon_2));
+        img = (FontIconDrawableView) mLayout.getChildAt(3);
         img.setBackgroundColor(Color.GREEN);
-        img.setImageDrawable(mThemeManager.getFontIconDrawable(R.string.test_font_icon_3));
+        img.setFontIcon(mThemeManager.getFontIconDrawable(R.string.test_font_icon_3));
         final int color  = mThemeManager.getColor(R.color.dolphin_theme_color);
         Log.d("ThemeManager", "got color=================" + Integer.toHexString(color));
         mColorPanel.setBackgroundColor(color);

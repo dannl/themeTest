@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- test single color text  -->
-    <string name="test_font_icon_0">fi_test0</string>
+    <string name="test_font_icon_0">fid_test1</string>
     <!-- test single drawable -->
-    <string name="test_font_icon_1">fid_test1</string>
+    <string name="test_font_icon_1">fi_test0</string>
     <!-- test selector drawable -->
-    <string name="test_font_icon_2">fxml_test2</string>
+    <string name="test_font_icon_2">fi_test3</string>
     <!-- test selector color -->
-    <string name="test_font_icon_3">fi_test3</string>
+    <string name="test_font_icon_3">fxml_test2</string>
 </resources>
