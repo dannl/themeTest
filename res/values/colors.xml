@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dolphin_theme_color">#ff379c00</color>
+    <color name="dolphin_theme_color_90">#dd379c00</color>
+    <color name="dolphin_theme_color_80">#aa379c00</color>
+    <color name="dolphin_theme_color_70">#77379c00</color>
+</resources>
