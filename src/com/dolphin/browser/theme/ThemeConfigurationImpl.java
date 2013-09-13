@@ -116,4 +116,14 @@ public class ThemeConfigurationImpl extends ThemeConfiguration {
         return ColorProcessor.sThemeColorIds;
     }
 
+    @Override
+    public int getCustomIconId() {
+        return 0;
+    }
+
+    @Override
+    public int getDefaultCustomColor() {
+        return 0x123456;
+    }
+
 }

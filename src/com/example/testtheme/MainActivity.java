@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
             mThemeManager.addThemeColorUpdatingCallback(new ThemeColorUpdatingCallback() {
 
                 @Override
-                public void onThemeColorChanged() {
+                public void onThemeColorChanged(final boolean isUpdatingCustomColor) {
                     Log.d("ThemeManager", "notifyed theme color changed!");
                     updateTheme();
                 }
